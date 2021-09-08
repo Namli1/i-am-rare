@@ -1,0 +1,72 @@
+{
+    "basequestions": [
+        {
+            "question": "Where do you live?",
+            "options": [
+                {
+                    "option": "Germany",
+                    "questions": [
+
+                        {
+                            "question": "How many years did you live here?",
+                            "source": "https://stacks.cdc.gov/view/cdc/100472",
+                            "options" : [
+                                {
+                                    "option": "<3",
+                                    "odds": 30
+                                },
+                                {
+                                    "option": ">5",
+                                    "odds": 70
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "option": "France",
+                    "questions": [
+                        {
+                            "question": "Did you ever visit the Brandenburger Tor?",
+                            "yesOdds": 0.1,
+                            "source": "https://stacks.cdc.gov/view/cdc/100472"
+                        },
+                        {
+                            "question": "Do you live in Frankfurt?",
+                            "yes": {
+                                "questions": [
+                                    {"question": "Do you like the Alte Oper?", "yesOdds": 70, "source": "https://stacks.cdc.gov/view/cdc/100472"},
+                                    {"question": "Did you ever go to the Oper?", "noOdds": 30, "source": "https://stacks.cdc.gov/view/cdc/100472"}
+                                ]
+                            },
+                            "noOdds": 30
+                        },
+
+
+
+                        {
+                            "question": "Do you live in the South of France?",
+                            "yes": {
+                                "questions": [
+                                    {
+                                        "question": "Did you vote for La Republique en Marche?",
+                                        "yesOdds": 30,
+                                        "source": "https://stacks.cdc.gov/view/cdc/100472"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Do you go surfing?",
+            "yesOdds": 19
+        },
+        {
+            "question": "Did you grow up in an undeveloped country?",
+            "noOdds": 30
+        }
+]
+}

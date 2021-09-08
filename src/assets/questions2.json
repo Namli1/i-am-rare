@@ -1,0 +1,89 @@
+{
+    "basequestions": [
+        {
+            "question": "Do you have siblings?",
+            "yes": {
+                "questions": [
+                    {
+                        "question": "Do you have a twin?",
+                        "yesOdds": 3.21,
+                        "source": "https://stacks.cdc.gov/view/cdc/100472"
+                    },
+                    {
+                        "question": "Do you have an identical twin?",
+                        "yesOdds": 0.5,
+                        "source": "https://www.insider.com/common-things-that-are-rare-2019-5#theres-3-to-5-chance-that-a-birth-will-result-in-identical-twins-2"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Where do you live?",
+            "options": [
+                {
+                    "option": "Germany",
+                    "questions": [
+
+                        {
+                            "question": "How many years did you live here?",
+                            "options" : [
+                                {
+                                    "option": "<3",
+                                    "odds": 30
+                                },
+                                {
+                                    "option": ">5",
+                                    "odds": 70
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "option": "France",
+                    "questions": [
+
+
+                        
+                        {
+                            "question": "Did you ever visit the Brandenburger Tor?",
+                            "yesOdds": 0.1
+                        },
+                        {
+                            "question": "Do you live in Frankfurt?",
+                            "yes": {
+                                "questions": [
+                                    {"question": "Do you like the Alte Oper?", "yesOdds": 70},
+                                    {"question": "Did you ever go to the Oper?", "noOdds": 30}
+                                ]
+                            },
+                            "noOdds": 30
+                        },
+
+
+
+                        {
+                            "question": "Do you live in the South of France?",
+                            "yes": {
+                                "questions": [
+                                    {
+                                        "question": "Did you vote for La Republique en Marche?",
+                                        "yesOdds": 30
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "question": "Do you go surfing?",
+            "yesOdds": 19
+        },
+        {
+            "question": "Did you grow up in an undeveloped country?",
+            "noOdds": 30
+        }
+]
+}
