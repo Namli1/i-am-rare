@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/i-am-rare/static/css/main.982b1ff1.chunk.css",
+    "main.js": "/i-am-rare/static/js/main.ad3d8817.chunk.js",
+    "main.js.map": "/i-am-rare/static/js/main.ad3d8817.chunk.js.map",
+    "runtime-main.js": "/i-am-rare/static/js/runtime-main.d924fd7d.js",
+    "runtime-main.js.map": "/i-am-rare/static/js/runtime-main.d924fd7d.js.map",
+    "static/js/2.200831ad.chunk.js": "/i-am-rare/static/js/2.200831ad.chunk.js",
+    "static/js/2.200831ad.chunk.js.map": "/i-am-rare/static/js/2.200831ad.chunk.js.map",
+    "index.html": "/i-am-rare/index.html",
+    "static/css/main.982b1ff1.chunk.css.map": "/i-am-rare/static/css/main.982b1ff1.chunk.css.map",
+    "static/js/2.200831ad.chunk.js.LICENSE.txt": "/i-am-rare/static/js/2.200831ad.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d924fd7d.js",
+    "static/js/2.200831ad.chunk.js",
+    "static/css/main.982b1ff1.chunk.css",
+    "static/js/main.ad3d8817.chunk.js"
+  ]
+}
