@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Select from 'react-select'
+import Select from 'react-select';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+// import { Router, hashHistory as history } from 'react-router';
+// // Your routes.js file
+// import routes from './routes';
 
 // eslint-disable-next-line
 function QuestionText(props) {
@@ -82,7 +88,7 @@ function AllQuestionsPlayed(props) {
         <div>
             <h1>Respect!</h1>
             <p>You just played through all questions, you crazy nerd! 
-                That means you played through {props.allQuestionCount} questions!
+                That means you played through {props.allQuestionsCount} questions!
                 We hate to say it, but maybe just get a hobby.
                 <br /> If you insist, you can restart the madness with the button below:
             </p>
@@ -258,7 +264,6 @@ class Game extends React.Component {
             // case "final":
             if (inputValue === true && this.state.questionData[this.state.currentQuestion].yesOdds) {
                 //If chose yes and there are yesOdds -> show Odds
-                alert("yesOdds");
                 var yesOdds = this.state.questionData[this.state.currentQuestion].yesOdds;
                 this.showOdds(yesOdds, "Yes");
             } else if (inputValue === true && this.state.questionData[this.state.currentQuestion].yes) {
@@ -295,118 +300,12 @@ class Game extends React.Component {
                 //If inputValue === "unselected", then user hasn't selected anything in select-field
                 alert("Trying to trick us? We noticed that you didn't select an option, so go do that before I can let you pass!"); 
             } else {
-                alert("next question");
                 //In all other cases, just set the next question
                 this.setNextQuestion();
             }
-
-            // else if (inputValue === false && this.state.questionData[this.state.currentQuestion].yesOdds) {
-            //     //If chose no and there are yesOdds -> next question
-            //     this.setNextQuestion();
-            // } else if (inputValue === true && this.state.questionData[this.state.currentQuestion].noOdds) {
-            //     //If chose yes and there are noOdds -> next question
-            //     this.setNextQuestion();
-            // }
-            //     break;
-            ////2. Type yesOrNo
-            // case "yesOrNo":
-                // if(inputValue === true && this.state.questionData[this.state.currentQuestion].yes) {
-                //     var newQuestions = this.state.questionData[this.state.currentQuestion].yes.questions;
-                //     this.goQuestionLevelDeeper(newQuestions);
-                //     // this.setState({
-                //     //     questionData: newQuestions,
-                //     //     questionCount: newQuestions.length,
-                //     //     currentQuestion: randomNumberExcluding(0, newQuestions.length, []),
-                //     //     tempAlreadyPlayedQuestions: [this.currentQuestion],
-                //     // });
-                // } else if (inputValue === false && this.state.questionData[this.state.currentQuestion].no) {
-                //     if (this.state.questionData[this.state.currentQuestion].no.odds) {
-                //         //If there are odds for choosing no
-
-                //     }
-                //     var newQuestions = this.state.questionData[this.state.currentQuestion].no.questions;
-                //     this.goQuestionLevelDeeper(newQuestions);
-                //     // this.setState({
-                //     //     questionData: newQuestions,
-                //     //     questionCount: newQuestions.length,
-                //     //     currentQuestion: randomNumberExcluding(0, newQuestions.length, []),
-                //     //     tempAlreadyPlayedQuestions: [this.currentQuestion],
-                //     // });
-                // } else {
-                //     this.setNextQuestion();
-                // }
-                // break;
-            ///3. Type choice
-            // case "choice":
-                //inputValue needs to pass in index of chosen option, otherwise error
-                //if(typeof inputValue === "number") {
-                    //If inputValue is a number, we have an options-type questions
-                    //So there are 2 possibilities:
-                        //1. There are more questions
-                        //2. There are yes or no Odds (Also means there might still be other questions)
-
-                    //1. There are more questions:
-                    //if (this.state.questionData[this.state.currentQuestion].options[inputValue].questions) {
-                        //We go one level deeper and set new questionData etc.
-                        //var questions = this.state.questionData[this.state.currentQuestion].options[inputValue].questions;
-                        //this.goQuestionLevelDeeper(questions);
-                        // var newQuestionIndex = randomNumberExcluding(0, questions.length, []);
-                        // this.setState({
-                        //     questionData: questions,
-                        //     questionCount: questions.length,
-                        //     //Get random current question and reset tempAlreadyPlayedQuestions with only currentQuestions
-                        //     currentQuestion: newQuestionIndex,
-                        //     //Include new currentQuestion in the reset tempAlreadyPlayedQuestions-Array
-                        //     tempAlreadyPlayedQuestions: [newQuestionIndex],
-                        // });
-                    //}
-                    //2. There are odds: (If still questions remaining show them after showing odds)
-                //     else if (this.state.questionData[this.state.currentQuestion].options[inputValue].odds) {
-                //         var odds = this.state.questionData[this.state.currentQuestion].options[inputValue].odds;
-                //         this.showOdds(odds);
-                //     } else {
-                //         alert("Something went wrong");
-                //     }
-                // } else {
-                //     alert("Something went wrong");
-                // }
-                // break;
-            // default:
-            //     alert("Something went wrong");
-        //}
-
-
-        // if (inputValue === true || inputValue === false) {
-    
-        // } 
-        // ////2. Type yesOrNo
-        // else if (typeof inputValue === "boolean" && this.state.questionData[this.state.currentQuestion].yes) {
-        //     //If is a yesOrNoQuestion that goes further down a "level"
-        //     alert("hello there");
-        // }
-
-        // ////3. Type options
-        // else if (typeof inputValue === "number") {
-            
-        // }
-
-
-        // var newQuestions = this.state.questionData[0].options[0].questions;
-        // this.setState({
-        //     questionData: newQuestions,
-        //     questionCount: questions.length,
-        // });
     }
 
     getQuestionType(question) {
-    //   if (question.options) {
-    //       alert("hiya");
-    //       return "choice";
-    //   } else if (question.yesOdds) {
-    //       alert("hiya2");
-    //     return "yesOrNo";
-    //   }
-  
       if (question.options) {
           return "choice";
       } else if (question.yes || question.no) {
@@ -420,7 +319,6 @@ class Game extends React.Component {
   }
 
   goQuestionLevelDeeper(questions) {
-      alert("going deeper");
     var newQuestionIndex = randomNumberExcluding(0, questions.length, []);
     this.setState({
         questionData: questions,
@@ -466,7 +364,6 @@ class Game extends React.Component {
             levelFromBehind += 1;
     
             if(levelFromBehind > this.state.questionHistory.length) {
-                alert("is at base");
                 //If we went trough all levels, fallback to base level and break while-loop:
                 isAtBaseLevel = true;
                 break;
@@ -502,7 +399,6 @@ class Game extends React.Component {
             //Append the current question to the already played array -> So only questions that were answered get appended
             alreadyPlayedBasequestions: newAlreadyPlayedBasequestions,
         }, () => {
-            alert("Setting base level question in local storage");
             localStorage.setItem('alreadyPlayedBaseQuestions', JSON.stringify(this.state.alreadyPlayedBasequestions));
             console.log(this.state.alreadyPlayedBasequestions);
         });
@@ -528,28 +424,6 @@ class Game extends React.Component {
             });
         }
     }
-    // console.log(this.state.questionHistory[this.state.questionHistory.length - 1].alreadyPlayedQuestions);
-    // if (this.state.currentQuestion + 1 < this.state.questionCount) {
-    //     //If there are still other questions at this "level", then first pick one of them
-    //     var newQuestionIndex = randomNumberExcluding(0, this.state.questionCount, this.state.tempAlreadyPlayedQuestions);
-    //     this.setState({
-    //         currentQuestion: newQuestionIndex,
-    //         tempAlreadyPlayedQuestions: this.state.tempAlreadyPlayedQuestions.concat([newQuestionIndex]),
-    //     });
-    // } else if (getData().basequestions.length > this.state.alreadyPlayedBasequestions.length) {
-    //     //If there are still basequestions left, move on to the next one
-    //     var newQuestionIndex = randomNumberExcluding(0, getData().basequestions.length, this.state.alreadyPlayedBasequestions);
-    //     this.setState({
-    //         questionData: getData().basequestions,
-    //         currentQuestion: newQuestionIndex,
-    //         questionCount: getData().basequestions.length,
-    //         //Append the new question to the already played array
-    //         alreadyPlayedBasequestions: this.state.alreadyPlayedBasequestions.concat([newQuestionIndex]),
-    //         //Reset the temporary already played questions array
-    //         tempAlreadyPlayedQuestions: [],
-    //         gameView: "game",
-    //     });
-    // } 
   }
 
     playAgain() {
@@ -557,11 +431,6 @@ class Game extends React.Component {
     }
 
     goBack() {
-        // if (this.state.alreadyPlayedBasequestions.length <= 1) {
-        //     //If user hasn't played at least 2 questions, he can't go back
-        //     alert("Play at least two questions to be able to go back!");
-        //     return;
-        // }
 
         if (this.state.questionHistory.length <= 1) {
             //If we are at base level or we were on the last question, get the question from the base questions
@@ -677,8 +546,6 @@ class Game extends React.Component {
     render() {
         var gameViewComponent;
 
-        console.log(this.state.gameView);
-
         switch(this.state.gameView) {
             case "start":
                 gameViewComponent = <QuestionField 
@@ -700,7 +567,7 @@ class Game extends React.Component {
                 gameViewComponent = <OddsView odds={this.odds} source={this.state.questionData[this.state.currentQuestion].source} onClick={() => this.playAgain()}/>;
                 break;
             case "all-questions-played":
-                gameViewComponent = <AllQuestionsPlayed allQuestionsCount={getData().basequestions.length} 
+                gameViewComponent = <AllQuestionsPlayed allQuestionsCount={getData().basequestions.length}
                 onClick={() => this.restartGame()}/>
                 break;
             default:
@@ -715,6 +582,31 @@ class Game extends React.Component {
 
         return (
             <div>
+                <Popup
+                    open={window.location.pathname === "i-am-rare/privacy-policy" || window.location.pathname === "/privacy-policy"}
+                    modal
+                    contentStyle={{width:'70%'}}
+                    >
+                {close => (
+                    <div className="modal">
+                        <button className="close" onClick={close}>
+                        &times;
+                        </button>
+                        <div className="header"> Privacy Policy </div>
+                        <div className="content">
+                        {' '}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
+                        Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
+                        delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
+                        <br />
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
+                        commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
+                        explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
+                        </div>
+                    </div>
+                    )}
+                </Popup>
+
                 <div className="column-container">
 
                     <div style={{height:"100%"}}>
@@ -737,6 +629,7 @@ class Game extends React.Component {
   // ========================================
   
   ReactDOM.render(
+    //<Router routes={routes} history={history} />,
     <Game />,
     document.getElementById('root')
   );
@@ -749,7 +642,7 @@ class Game extends React.Component {
   function randomNumberExcluding(min, max, excludedNumbers) {
       //If there are more excluded numbers than the range, exit function
     if (max-min <= excludedNumbers.length) {
-        alert("more excluded numbers than the range");
+        alert("Error: more excluded numbers than the range");
         return;
     }
       var number = Math.floor(Math.random() * (max-min) + min);
