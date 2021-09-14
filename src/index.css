@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    max-height: 100%;
+    height: 97%;
     margin: 0;
     position: relative;
 }
@@ -284,7 +284,7 @@ body {
 
 .modal {
     overflow-y: scroll;
-    max-height: 100vh;
+    max-height: 100%;
   }
   .modal > .header {
     width: 100%;
