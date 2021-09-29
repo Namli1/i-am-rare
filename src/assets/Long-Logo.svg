@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1000 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g id="Round-Logo.afdesign" transform="matrix(0.178757,0,0,0.178757,157.514,150)">
+        <g transform="matrix(1,0,0,1,-540,-540)">
+            <clipPath id="_clip1">
+                <rect x="0" y="0" width="1080" height="1080"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(1.08101,-0.470794,0.488795,1.12235,-300.21,171.945)">
+                    <ellipse cx="528.687" cy="549.702" rx="457.983" ry="441.116" style="fill:url(#_Linear2);"/>
+                </g>
+                <g transform="matrix(0.807407,0,0,0.803351,108.141,65.2703)">
+                    <ellipse cx="298.411" cy="353.282" rx="185.78" ry="186.718" style="fill:none;stroke:rgb(254,255,254);stroke-width:32.28px;"/>
+                </g>
+                <g transform="matrix(0.807407,0,0,0.803351,489.981,65.2703)">
+                    <ellipse cx="298.411" cy="353.282" rx="185.78" ry="186.718" style="fill:none;stroke:rgb(254,255,254);stroke-width:32.28px;"/>
+                </g>
+                <g transform="matrix(0.807407,0,0,0.803351,108.141,447.11)">
+                    <ellipse cx="298.411" cy="353.282" rx="185.78" ry="186.718" style="fill:none;stroke:rgb(254,255,254);stroke-width:32.28px;"/>
+                </g>
+                <g transform="matrix(0.858006,0,0,0.906298,18.4423,-14.1241)">
+                    <path d="M830.387,657.4L879.347,775.662C879.347,775.662 1013.23,783.035 1013.28,783.2L909.606,863.827C909.606,863.827 943.57,986.647 943.422,986.748L830.387,918.316C830.387,918.316 717.5,986.849 717.353,986.748L751.168,863.827C751.168,863.827 647.437,783.364 647.493,783.2L781.427,775.662C781.427,775.662 830.205,657.4 830.387,657.4Z" style="fill:rgb(254,255,254);stroke:rgb(254,255,254);stroke-width:20.4px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,6.03736,0)">
+        <text x="284.861px" y="204.25px" style="font-family:'Questrial-Regular', 'Questrial';font-size:155px;">I Am R<tspan x="726.611px 818.836px 870.296px " y="204.25px 204.25px 204.25px ">are</tspan></text>
+    </g>
+    <defs>
+        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(915.965,0,0,882.232,70.7041,549.702)"><stop offset="0" style="stop-color:rgb(106,106,106);stop-opacity:1"/><stop offset="0.44" style="stop-color:rgb(87,86,86);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(45,40,40);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

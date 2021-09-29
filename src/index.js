@@ -4,6 +4,7 @@ import './index.css';
 import Select from 'react-select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import logo from './assets/Round-Logo.svg';
 
 // import { Router, hashHistory as history } from 'react-router';
 // // Your routes.js file
@@ -50,8 +51,6 @@ function ChoiceField(props) {
         var choiceOptions = props.options.map(function(option, index) {
             return {value: index, label: option.option};
         });
-        console.log(selectedValue);
-        console.log(selectedValue==="unselected" ? null : undefined);
         return (
             <div className="select-row">
                 <Select 
@@ -110,8 +109,6 @@ function toggleDropdown() {
 }
 
 function RarePercentageList(props) {
-    console.log(props.data.length === 0 ? [{"rarity": 0, "question": "", "choice": "You ain't rare yet!"}] : props.data);
-
     return (
         <div className="table-container" id="table-container" onClick={ () => toggleDropdown() }>
             <div className="dropdown-button" id="dropdown-button">
@@ -160,7 +157,6 @@ function RarePercentageList(props) {
 class QuestionField extends React.Component {
 
     getAnswerField(questionType) {
-        console.log(questionType);
         switch(questionType) {
             case "final":
             case "yesOrNo":
@@ -182,7 +178,10 @@ class QuestionField extends React.Component {
     render() {
         return (
             <div>
-                <h1>I Am Rare</h1>
+                <div style={{display:"table", margin:"0 auto", marginBottom:"13px"}}>
+                    <img src={logo} alt="Logo for I-Am-Rare website" width={"50rem"} style={{display:"table-cell", verticalAlign:"middle", marginRight:"5px", textAlign:"center"}}/>
+                    <h1 style={{display:"table-cell", verticalAlign:"middle", textAlign:"center"}}>I Am Rare</h1>
+                    </div>
                 <div className="question-row">
                     <QuestionText questionText={this.props.questionText}/>
                 </div>
@@ -197,10 +196,8 @@ class QuestionField extends React.Component {
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        console.log(localStorage.getItem('alreadyPlayedBaseQuestions'));
         let alreadyPlayedBaseQuestionsFromLocalStorage = localStorage.getItem('alreadyPlayedBaseQuestions') === null || localStorage.getItem('alreadyPlayedBaseQuestions') === "undefined" ? [] : JSON.parse(localStorage.getItem('alreadyPlayedBaseQuestions'));
-        console.log(alreadyPlayedBaseQuestionsFromLocalStorage);
-        if (alreadyPlayedBaseQuestionsFromLocalStorage.length === getData().basequestions.length) {
+        if (alreadyPlayedBaseQuestionsFromLocalStorage.length === getData(alreadyPlayedBaseQuestionsFromLocalStorage.length).basequestions.length) {
             //If user played through all base questions, show him some respect!
             this.state = {
                 gameView: "all-questions-played",
@@ -208,17 +205,16 @@ class Game extends React.Component {
             }
         } else {
             //Otherwise continue as normal
-            console.log(alreadyPlayedBaseQuestionsFromLocalStorage);
-            var nextQuestionIndex = randomNumberExcluding(0, getData().basequestions.length, alreadyPlayedBaseQuestionsFromLocalStorage);
-            console.log(localStorage.getItem('alreadyPlayedBaseQuestions'));
+            var alreadyPlayedBaseQuestions = localStorage.getItem('alreadyPlayedBaseQuestions') === null || localStorage.getItem('alreadyPlayedBaseQuestions') === "undefined" ? [] : JSON.parse(localStorage.getItem('alreadyPlayedBaseQuestions'));
+            var nextQuestionIndex = randomNumberExcluding(0, getData(alreadyPlayedBaseQuestions.length).basequestions.length, alreadyPlayedBaseQuestionsFromLocalStorage);
             this.state = {
-                questionData: getData().basequestions,
+                questionData: getData(alreadyPlayedBaseQuestions.length).basequestions,
                 //Get random question Index, excluding nothing at first
                 currentQuestion: nextQuestionIndex,
                 currentBaseQuestion: nextQuestionIndex,
-                questionCount: getData().basequestions.length,
+                questionCount: getData(alreadyPlayedBaseQuestions.length).basequestions.length,
                 //Get local storage alreadyPlayedBasequestions, otherwise set empty array
-                alreadyPlayedBasequestions: localStorage.getItem('alreadyPlayedBaseQuestions') === null || localStorage.getItem('alreadyPlayedBaseQuestions') === "undefined" ? [] : JSON.parse(localStorage.getItem('alreadyPlayedBaseQuestions')),
+                alreadyPlayedBasequestions: alreadyPlayedBaseQuestions,
                 tempAlreadyPlayedQuestions: [],
                 questionHistory: [],
                 currentQuestionLevel: 0,
@@ -239,7 +235,6 @@ class Game extends React.Component {
                 // ]
             }
         }
-        console.log(this.state.alreadyPlayedBasequestions);
     }
 
     //The odds for the "odds"-view
@@ -248,7 +243,6 @@ class Game extends React.Component {
     shouldContinueInLevel = false;
 
     handleSubmit(inputValue) {
-        console.log(inputValue);
         //These two are the same (structure), just set the questionData to the next "level" and then the game can just continue
         // console.log(getData().basequestions);
         // console.log(getData().basequestions[0].options[0].questions);
@@ -349,14 +343,9 @@ class Game extends React.Component {
         //console.log(currentLevelData.alreadyPlayedQuestions.length >= currentLevelData.questions.length);
         while (currentLevelData && levelFromBehind <= this.state.questionHistory.length && currentLevelData.alreadyPlayedQuestions.length >= currentLevelData.questions.length) {
             //While there are no questions at this level, go up one level
-                        
-            console.log(this.state.questionHistory[this.state.questionHistory.length - levelFromBehind]);
-            console.log("levelFromBehind: " + levelFromBehind);
-            console.log("questionHistory length: " + this.state.questionHistory.length);
 
             //As long as there are no questions at this level (i.e. more alreadyPlayed than there are questions), go up one level
             //Also checks if it's already at last level
-            console.log("while");
     
             //Set base level to false for now, might be changed in if-statement below
             isAtBaseLevel = false;
@@ -392,28 +381,25 @@ class Game extends React.Component {
     } else if(isAtBaseLevel) {
         //Add the current question to alreadyPlayedBaseQuestions
         var currentBaseQuestion = this.state.currentBaseQuestion;
-        console.log(currentBaseQuestion);
         var newAlreadyPlayedBasequestions = this.state.alreadyPlayedBasequestions ? this.state.alreadyPlayedBasequestions.concat([currentBaseQuestion]) : [currentBaseQuestion];
-        console.log(newAlreadyPlayedBasequestions);
         this.setState({
             //Append the current question to the already played array -> So only questions that were answered get appended
             alreadyPlayedBasequestions: newAlreadyPlayedBasequestions,
         }, () => {
             localStorage.setItem('alreadyPlayedBaseQuestions', JSON.stringify(this.state.alreadyPlayedBasequestions));
-            console.log(this.state.alreadyPlayedBasequestions);
         });
 
         //Add +1 to alreadyPlayedBasequestions because you only append current question in the setState below
-        if (getData().basequestions.length > this.state.alreadyPlayedBasequestions.length + 1) {
+        if (getData(this.state.alreadyPlayedBasequestions.length).basequestions.length > this.state.alreadyPlayedBasequestions.length + 1) {
             //If there are still basequestions left, move on to the next one
             
             //Add current base question to alreadyPlayedBaseQuestions
-            var newQuestionIndex = randomNumberExcluding(0, getData().basequestions.length, newAlreadyPlayedBasequestions);
+            var newQuestionIndex = randomNumberExcluding(0, getData(this.state.alreadyPlayedBasequestions.length).basequestions.length, newAlreadyPlayedBasequestions);
             this.setState({
-                questionData: getData().basequestions,
+                questionData: getData(this.state.alreadyPlayedBasequestions.length).basequestions,
                 currentQuestion: newQuestionIndex,
                 currentBaseQuestion: newQuestionIndex,
-                questionCount: getData().basequestions.length,
+                questionCount: getData(this.state.alreadyPlayedBasequestions.length).basequestions.length,
                 //Reset the questionHistory
                 questionHistory: [],
                 gameView: "game",
@@ -435,12 +421,11 @@ class Game extends React.Component {
         if (this.state.questionHistory.length <= 1) {
             //If we are at base level or we were on the last question, get the question from the base questions
             var lastBaseQuestionIndex = this.state.alreadyPlayedBasequestions[this.state.alreadyPlayedBasequestions.length - 1];
-            console.log(this.state.alreadyPlayedBasequestions);
             var lastQuestions = this.state.alreadyPlayedBasequestions.pop();
 
 
             this.setState({
-                questionData: getData().basequestions,
+                questionData: getData(this.state.alreadyPlayedBasequestions.length).basequestions,
                 currentQuestion: lastBaseQuestionIndex,
                 questionHistory: [],
                 alreadyPlayedBasequestions: lastQuestions,
@@ -448,7 +433,6 @@ class Game extends React.Component {
             });
         } else {
             //Otherwise get the questions from the questionHistory
-            console.log(this.state.questionHistory);
             if (this.state.questionHistory[this.state.questionHistory.length - 1].alreadyPlayedQuestions.length > 1) {
                 //If more than one question played at this level, first go back to that question
                 //var lastQuestions = this.state.questionHistory[this.state.questionHistory.length - 1].questions;
@@ -475,7 +459,6 @@ class Game extends React.Component {
     }
 
     showOdds(rarity, choice) {
-        console.log(rarity);
         this.odds = rarity;
 
         //saving odds in rarity list
@@ -497,14 +480,14 @@ class Game extends React.Component {
     }
 
     restartGame() {
-        console.log("RESTARTED HERE!!!");
-        var nextQuestionIndex = randomNumberExcluding(0, getData().basequestions.length, []);
+        console.log("RESTARTED!!!");
+        var nextQuestionIndex = randomNumberExcluding(0, getData(0).basequestions.length, []);
         this.setState({
-                questionData: getData().basequestions,
+                questionData: getData(0).basequestions,
                 //Get random question Index, excluding nothing at first
                 currentQuestion: nextQuestionIndex,
                 currentBaseQuestion: nextQuestionIndex,
-                questionCount: getData().basequestions.length,
+                questionCount: getData(0).basequestions.length,
                 //reset already Played Basequestions:
                 alreadyPlayedBasequestions: [],
                 questionHistory: [],
@@ -529,7 +512,6 @@ class Game extends React.Component {
             });
             break;
         case "odds":
-            console.log("yesOdds called");
             this.setState({
                 gameView: "odds",
             });
@@ -567,7 +549,7 @@ class Game extends React.Component {
                 gameViewComponent = <OddsView odds={this.odds} source={this.state.questionData[this.state.currentQuestion].source} onClick={() => this.playAgain()}/>;
                 break;
             case "all-questions-played":
-                gameViewComponent = <AllQuestionsPlayed allQuestionsCount={getData().basequestions.length}
+                gameViewComponent = <AllQuestionsPlayed allQuestionsCount={getData(this.state.alreadyPlayedBasequestions.length).basequestions.length}
                 onClick={() => this.restartGame()}/>
                 break;
             default:
@@ -712,8 +694,19 @@ class Game extends React.Component {
     document.getElementById('root')
   );
 
-  function getData() {
+  function getData(alreadyPlayedBasequestionsLength) {
       var data = require('./assets/questions.json');
+      if (alreadyPlayedBasequestionsLength > 1) {
+        var list1 = require('./assets/questions.json');
+        var list2 = require('./assets/questions2.json');
+        //Merging the two basequestion lists:
+        var combined = list1.basequestions.concat(list2.basequestions);
+        data = {
+            'basequestions': combined,
+        }
+      } else {
+        data = require('./assets/questions.json');
+      }
       return data;
   }
 
